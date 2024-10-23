@@ -39,18 +39,36 @@ public class Application {
                     carEntry.setValue(carEntry.getValue() + 1);
                 }
             }
-            int winningScore = Collections.max(racingCar.values());
-            for (Entry<String, Integer> carEntry : racingCar.entrySet()) {
-                if (carEntry.getValue() == winningScore) {
-                    winningCars.add(carEntry.getKey());
-                }
-            }
+            printGameResult(racingCar, winningCars);
         }
+        printWinningCars(winningCars);
 
     }
 
     private static boolean checkMoveOrNot() {
         int randomNum = Randoms.pickNumberInRange(0, 9);
         return randomNum >= 4;
+    }
+
+    private static void printGameResult(Map<String, Integer> racingCar, Set<String> winningCars) {
+        int winningScore = Collections.max(racingCar.values());
+        for (Entry<String, Integer> carEntry : racingCar.entrySet()) {
+            printOneRoundResult(carEntry);
+            if (carEntry.getValue() == winningScore) {
+                winningCars.add(carEntry.getKey());
+            }
+        }
+        System.out.println();
+    }
+
+    private static void printOneRoundResult(Entry<String, Integer> carEntry) {
+        String carName = carEntry.getKey();
+        Integer nowScore = carEntry.getValue();
+        System.out.println(carName + " : " + "-".repeat(nowScore));
+    }
+
+    private static void printWinningCars(Set<String> winningCars) {
+        System.out.print("최종 우승자 : ");
+        System.out.println(String.join(",", winningCars));
     }
 }
