@@ -1,6 +1,7 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.*;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -36,6 +37,12 @@ public class Application {
             for (Entry<String, Integer> carEntry : racingCar.entrySet()) {
                 if (checkMoveOrNot()) {
                     carEntry.setValue(carEntry.getValue() + 1);
+                }
+            }
+            int winningScore = Collections.max(racingCar.values());
+            for (Entry<String, Integer> carEntry : racingCar.entrySet()) {
+                if (carEntry.getValue() == winningScore) {
+                    winningCars.add(carEntry.getKey());
                 }
             }
         }
