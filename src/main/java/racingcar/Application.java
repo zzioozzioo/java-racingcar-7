@@ -60,7 +60,7 @@ public class Application {
                     carEntry.setValue(carEntry.getValue() + 1);
                 }
             }
-            printGameResult(racingCar, winningCars);
+            winningCars = printGameResult(racingCar);
         }
         printWinningCars(winningCars);
 
@@ -77,8 +77,8 @@ public class Application {
         return randomNum >= 4;
     }
 
-    // TODO: 우승자 계산을 잘못하는 경우 발생 -> fix하기
-    private static void printGameResult(Map<String, Integer> racingCar, Set<String> winningCars) {
+    private static Set<String> printGameResult(Map<String, Integer> racingCar) {
+        Set<String> winningCars = new HashSet<>();
         int winningScore = Collections.max(racingCar.values());
         for (Entry<String, Integer> carEntry : racingCar.entrySet()) {
             printOneRoundResult(carEntry);
@@ -87,6 +87,7 @@ public class Application {
             }
         }
         System.out.println();
+        return winningCars;
     }
 
     private static void printOneRoundResult(Entry<String, Integer> carEntry) {
