@@ -13,18 +13,11 @@ public class RacingCars {
 
     public Map<String, Integer> initializeCars(String[] splitCarName) {
         for (String s : splitCarName) {
-            validateNameLength(s);
             racingCars.put(s, 0);
         }
         return racingCars;
     }
 
-    // validator에 추가?
-    private void validateNameLength(String s) {
-        if (s.length() > 5) {
-            throw new CarNameOverLengthLimitException();
-        }
-    }
 
     public void race() {
         for (Entry<String, Integer> carEntry : racingCars.entrySet()) {

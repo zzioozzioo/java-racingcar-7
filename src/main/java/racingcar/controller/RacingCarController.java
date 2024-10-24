@@ -6,9 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import racingcar.domain.RacingCars;
 import racingcar.domain.Winning;
-import racingcar.exception.EmptyNameBetweenCommaException;
-import racingcar.exception.SingleCarNameException;
-import racingcar.exception.TryCountException;
+import racingcar.validator.Validator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -19,36 +17,22 @@ public class RacingCarController {
 
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
+    Validator validator = new Validator();
     public void run() {
 
         // 자동차 이름 입력받기
         String inputCarsName = inputView.readCarsName();
+        validator.validateInputCarNamesContainComma(inputCarsName);
 
-        // validator에 추가
-        if (!inputCarsName.contains(DELIMITER)) {
-            throw new SingleCarNameException();
-        }
-
+        // 초기화 전 검증이 가능할까?
         String[] splitCarName = Arrays.stream(inputCarsName.split(DELIMITER, -1))
                 .map(String::trim)
                 .toArray(String[]::new);
-
-        // validator에 추가
-        for (String carName : splitCarName) {
-            if (carName.isEmpty()) {
-                throw new EmptyNameBetweenCommaException();
-            }
-        }
+        validator.validateAllCarNames(splitCarName);
 
         // 시도 횟수 입력받기
         int inputCount = inputView.readTryCount();
-
-        // validator에 추가
-        final int MIN_TRY_COUNT = 1;
-        final int MAX_TRY_COUNT = 100; // 수정 가능
-        if (inputCount < MIN_TRY_COUNT || inputCount > MAX_TRY_COUNT) {
-            throw new TryCountException();
-        }
+        validator.validateInputCountRange(inputCount);
 
         // 게임 시작
         startRace(splitCarName, inputCount);
