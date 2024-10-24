@@ -1,12 +1,10 @@
 package racingcar;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
-import java.util.stream.Collectors;
 import racingcar.domain.RacingCars;
+import racingcar.domain.Winning;
 import racingcar.exception.EmptyNameBetweenCommaException;
 import racingcar.exception.SingleCarNameException;
 import racingcar.exception.TryCountException;
@@ -60,22 +58,10 @@ public class Application {
             outputView.printOneRoundResult(cars);
         }
 
-        Set<String> winningCars = getWinningCars(cars);
+        Winning winning = new Winning();
+        winning.calculateWinningScore(cars);
+        Set<String> winningCars = winning.getWinningCars(cars);
         outputView.printWinningCars(winningCars);
 
-
-
     }
-
-    private static Set<String> getWinningCars(Map<String, Integer> racingCars) {
-        int winningScore = Collections.max(racingCars.values());
-
-        return racingCars.entrySet().stream()
-                .filter(racingCar -> racingCar.getValue() == winningScore)
-                .map(Entry::getKey)
-                .collect(Collectors.toSet());
-
-    }
-
-
 }
