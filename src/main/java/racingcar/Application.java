@@ -8,6 +8,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
+import racingcar.exception.CarNameOverLengthLimitException;
+import racingcar.exception.EmptyNameBetweenCommaException;
+import racingcar.exception.NonNumericException;
+import racingcar.exception.SingleCarNameException;
+import racingcar.exception.TryCountException;
 
 public class Application {
     public static void main(String[] args) {
@@ -17,14 +22,13 @@ public class Application {
         final int MIN_TRY_COUNT = 1;
         final int MAX_TRY_COUNT = 100; // 수정 가능
 
-        int inputCount = 0;
 
         // 자동차 이름 입력받기
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String inputCarName = Console.readLine();
 
         if (!inputCarName.contains(DELIMITER)) {
-            throw new IllegalArgumentException("자동차의 이름은 두 개 이상 입력해야 합니다.");
+            throw new SingleCarNameException();
         }
 
         String[] splitCarName = Arrays.stream(inputCarName.split(DELIMITER, -1))
@@ -33,20 +37,22 @@ public class Application {
 
         for (String carName : splitCarName) {
             if (carName.isEmpty()) {
-                throw new IllegalArgumentException("쉼표와 쉼표 사이에 이름을 입력해야 합니다.");
+                throw new EmptyNameBetweenCommaException();
             }
         }
 
         // 시도 횟수 입력받기
         System.out.println("시도할 횟수는 몇 회인가요?");
+        int inputCount;
+
         try {
             inputCount = Integer.parseInt(Console.readLine());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+            throw new NonNumericException();
         }
 
         if (inputCount < MIN_TRY_COUNT || inputCount > MAX_TRY_COUNT) {
-            throw new IllegalArgumentException("시도할 횟수는 1 이상 100 이하여야 합니다.");
+            throw new TryCountException();
         }
 
         // 게임 시작
@@ -73,7 +79,7 @@ public class Application {
 
     private static void validateNameLength(String s) {
         if (s.length() > 5) {
-            throw new IllegalArgumentException("자동차의 이름은 5자 이하여야 합니다.");
+            throw new CarNameOverLengthLimitException();
         }
     }
 
