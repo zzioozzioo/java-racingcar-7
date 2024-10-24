@@ -4,10 +4,10 @@ import camp.nextstep.edu.missionutils.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
@@ -19,6 +19,7 @@ public class Application {
 
         int inputCount = 0;
 
+        // 자동차 이름 입력받기
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String inputCarName = Console.readLine();
 
@@ -36,6 +37,7 @@ public class Application {
             }
         }
 
+        // 시도 횟수 입력받기
         System.out.println("시도할 횟수는 몇 회인가요?");
         try {
             inputCount = Integer.parseInt(Console.readLine());
@@ -47,23 +49,26 @@ public class Application {
             throw new IllegalArgumentException("시도할 횟수는 1 이상 100 이하여야 합니다.");
         }
 
-        Map<String, Integer> racingCar = new HashMap<>();
-        for (String s : splitCarName) {
-            validateNameLength(s);
-            racingCar.put(s, 0);
+        // 게임 시작
+        Map<String, Integer> racingCars = initializeCars(splitCarName);
+
+        for (int count = 0; count < inputCount; count++) {
+            race(racingCars);
+            printOneRoundResult(racingCars);
         }
 
-        Set<String> winningCars = new HashSet<>();
-        for (int count = 0; count < inputCount; count++) {
-            for (Entry<String, Integer> carEntry : racingCar.entrySet()) {
-                if (checkMoveOrNot()) {
-                    carEntry.setValue(carEntry.getValue() + 1);
-                }
-            }
-            winningCars = printGameResult(racingCar);
-        }
+        Set<String> winningCars = getWinningCars(racingCars);
         printWinningCars(winningCars);
 
+    }
+
+    private static Map<String, Integer> initializeCars(String[] splitCarName) {
+        Map<String, Integer> racingCars = new HashMap<>();
+        for (String s : splitCarName) {
+            validateNameLength(s);
+            racingCars.put(s, 0);
+        }
+        return racingCars;
     }
 
     private static void validateNameLength(String s) {
@@ -72,28 +77,40 @@ public class Application {
         }
     }
 
+    private static void race(Map<String, Integer> racingCars) {
+        for (Entry<String, Integer> carEntry : racingCars.entrySet()) {
+            if (checkMoveOrNot()) {
+                carEntry.setValue(carEntry.getValue() + 1);
+            }
+        }
+    }
+
     private static boolean checkMoveOrNot() {
         int randomNum = Randoms.pickNumberInRange(0, 9);
         return randomNum >= 4;
     }
 
-    private static Set<String> printGameResult(Map<String, Integer> racingCar) {
-        Set<String> winningCars = new HashSet<>();
-        int winningScore = Collections.max(racingCar.values());
+    private static void printOneRoundResult(Map<String, Integer> racingCar) {
         for (Entry<String, Integer> carEntry : racingCar.entrySet()) {
-            printOneRoundResult(carEntry);
-            if (carEntry.getValue() == winningScore) {
-                winningCars.add(carEntry.getKey());
-            }
+            printOneCarResult(carEntry);
         }
         System.out.println();
-        return winningCars;
     }
 
-    private static void printOneRoundResult(Entry<String, Integer> carEntry) {
+    private static void printOneCarResult(Entry<String, Integer> carEntry) {
         String carName = carEntry.getKey();
         Integer nowScore = carEntry.getValue();
         System.out.println(carName + " : " + "-".repeat(nowScore));
+    }
+
+    private static Set<String> getWinningCars(Map<String, Integer> racingCars) {
+        int winningScore = Collections.max(racingCars.values());
+
+        return racingCars.entrySet().stream()
+                .filter(racingCar -> racingCar.getValue() == winningScore)
+                .map(Entry::getKey)
+                .collect(Collectors.toSet());
+
     }
 
     private static void printWinningCars(Set<String> winningCars) {
