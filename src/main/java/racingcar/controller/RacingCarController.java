@@ -20,25 +20,36 @@ public class RacingCarController {
     Validator validator = new Validator();
     public void run() {
 
-        // 자동차 이름 입력받기
-        String inputCarsName = inputView.readCarsName();
-        validator.validateInputCarNamesContainComma(inputCarsName);
+        String inputCarNames = getInputCarNames();
+        int inputCount = getInputCount();
 
-        // 초기화 전 검증이 가능할까?
-        String[] splitCarName = Arrays.stream(inputCarsName.split(DELIMITER, -1))
+        // TODO: 초기화 전 검증이 가능할까?
+        String[] splitCarName = getSplitCarNames(inputCarNames);
+
+        startRace(splitCarName, inputCount);
+    }
+
+    private String getInputCarNames() {
+        String inputCarNames = inputView.readCarNames();
+        validator.validateInputCarNamesContainComma(inputCarNames);
+        return inputCarNames;
+    }
+
+    private int getInputCount() {
+        int inputCount = inputView.readTryCount();
+        validator.validateInputCountRange(inputCount);
+        return inputCount;
+    }
+
+    private String[] getSplitCarNames(String inputCarNames) {
+        String[] splitCarName = Arrays.stream(inputCarNames.split(DELIMITER, -1))
                 .map(String::trim)
                 .toArray(String[]::new);
         validator.validateAllCarNames(splitCarName);
-
-        // 시도 횟수 입력받기
-        int inputCount = inputView.readTryCount();
-        validator.validateInputCountRange(inputCount);
-
-        // 게임 시작
-        startRace(splitCarName, inputCount);
-
+        return splitCarName;
     }
 
+    // TODO: 메서드 분리
     private void startRace(String[] splitCarName, int inputCount) {
         RacingCars racingCars = new RacingCars();
         Map<String, Integer> cars = racingCars.initializeCars(splitCarName);
