@@ -13,6 +13,7 @@ import racingcar.exception.EmptyNameBetweenCommaException;
 import racingcar.exception.SingleCarNameException;
 import racingcar.exception.TryCountException;
 import racingcar.view.InputView;
+import racingcar.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class Application {
         final int MAX_TRY_COUNT = 100; // 수정 가능
 
         InputView inputView = new InputView();
-
+        OutputView outputView = new OutputView();
 
         // 자동차 이름 입력받기
         String inputCarsName = inputView.readCarsName();
@@ -57,11 +58,11 @@ public class Application {
 
         for (int count = 0; count < inputCount; count++) {
             race(racingCars);
-            printOneRoundResult(racingCars);
+            outputView.printOneRoundResult(racingCars);
         }
 
         Set<String> winningCars = getWinningCars(racingCars);
-        printWinningCars(winningCars);
+        outputView.printWinningCars(winningCars);
 
     }
 
@@ -74,6 +75,7 @@ public class Application {
         return racingCars;
     }
 
+    // validator에 추가?
     private static void validateNameLength(String s) {
         if (s.length() > 5) {
             throw new CarNameOverLengthLimitException();
@@ -93,19 +95,6 @@ public class Application {
         return randomNum >= 4;
     }
 
-    private static void printOneRoundResult(Map<String, Integer> racingCar) {
-        for (Entry<String, Integer> carEntry : racingCar.entrySet()) {
-            printOneCarResult(carEntry);
-        }
-        System.out.println();
-    }
-
-    private static void printOneCarResult(Entry<String, Integer> carEntry) {
-        String carName = carEntry.getKey();
-        Integer nowScore = carEntry.getValue();
-        System.out.println(carName + " : " + "-".repeat(nowScore));
-    }
-
     private static Set<String> getWinningCars(Map<String, Integer> racingCars) {
         int winningScore = Collections.max(racingCars.values());
 
@@ -114,10 +103,5 @@ public class Application {
                 .map(Entry::getKey)
                 .collect(Collectors.toSet());
 
-    }
-
-    private static void printWinningCars(Set<String> winningCars) {
-        System.out.print("최종 우승자 : ");
-        System.out.println(String.join(", ", winningCars));
     }
 }
