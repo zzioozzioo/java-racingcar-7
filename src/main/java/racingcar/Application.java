@@ -10,9 +10,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import racingcar.exception.CarNameOverLengthLimitException;
 import racingcar.exception.EmptyNameBetweenCommaException;
-import racingcar.exception.NonNumericException;
 import racingcar.exception.SingleCarNameException;
 import racingcar.exception.TryCountException;
+import racingcar.view.InputView;
 
 public class Application {
     public static void main(String[] args) {
@@ -22,19 +22,22 @@ public class Application {
         final int MIN_TRY_COUNT = 1;
         final int MAX_TRY_COUNT = 100; // 수정 가능
 
+        InputView inputView = new InputView();
+
 
         // 자동차 이름 입력받기
-        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
-        String inputCarName = Console.readLine();
+        String inputCarsName = inputView.readCarsName();
 
-        if (!inputCarName.contains(DELIMITER)) {
+        // validator에 추가
+        if (!inputCarsName.contains(DELIMITER)) {
             throw new SingleCarNameException();
         }
 
-        String[] splitCarName = Arrays.stream(inputCarName.split(DELIMITER, -1))
+        String[] splitCarName = Arrays.stream(inputCarsName.split(DELIMITER, -1))
                 .map(String::trim)
                 .toArray(String[]::new);
 
+        // validator에 추가
         for (String carName : splitCarName) {
             if (carName.isEmpty()) {
                 throw new EmptyNameBetweenCommaException();
@@ -42,15 +45,9 @@ public class Application {
         }
 
         // 시도 횟수 입력받기
-        System.out.println("시도할 횟수는 몇 회인가요?");
-        int inputCount;
+        int inputCount = inputView.readTryCount();
 
-        try {
-            inputCount = Integer.parseInt(Console.readLine());
-        } catch (NumberFormatException e) {
-            throw new NonNumericException();
-        }
-
+        // validator에 추가
         if (inputCount < MIN_TRY_COUNT || inputCount > MAX_TRY_COUNT) {
             throw new TryCountException();
         }
