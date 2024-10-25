@@ -1,6 +1,7 @@
 package racingcar.controller;
 
-import java.util.Arrays;
+import static racingcar.util.Utility.getSplitCarNames;
+
 import java.util.Map;
 import java.util.Set;
 import racingcar.domain.RacingCars;
@@ -16,7 +17,7 @@ public class RacingCarController {
 
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
-    Validator validator = new Validator();
+    Validator validator = new Validator(); // TODO: 객체 생성 or static 고민해보기
 
     public void run() {
 
@@ -41,15 +42,6 @@ public class RacingCarController {
         return inputCount;
     }
 
-    // TODO: util에 포함? 고민해보기
-    private String[] getSplitCarNames(String inputCarNames) {
-        String[] splitCarName = Arrays.stream(inputCarNames.split(DELIMITER, -1))
-                .map(String::trim)
-                .toArray(String[]::new);
-
-        validator.validateAllCarNames(splitCarName);
-        return splitCarName;
-    }
 
     // TODO: 메서드 분리
     private void race(String[] splitCarName, int inputCount) {

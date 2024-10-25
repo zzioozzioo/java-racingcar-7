@@ -1,6 +1,7 @@
 package racingcar.domain;
 
-import camp.nextstep.edu.missionutils.Randoms;
+import static racingcar.util.Utility.checkMoveOrNot;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,9 +29,4 @@ public class RacingCars {
         });
     }
 
-    // util함수 -> utility에 포함?
-    private boolean checkMoveOrNot() {
-        int randomNum = Randoms.pickNumberInRange(0, 9);
-        return randomNum >= 4;
-    }
 }

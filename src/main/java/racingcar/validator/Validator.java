@@ -10,17 +10,19 @@ import racingcar.exception.TryCountException;
 
 public class Validator {
 
+    // TODO: static 클래스? 고민해보기
+
     final int MIN_TRY_COUNT = 1;
-    final int MAX_TRY_COUNT = 100; // 수정 가능
+    final int MAX_TRY_COUNT = 100; // TODO: 수정 가능, 고민해보기
 
     //
-    public void validateInputCarNamesContainComma(String inputCarsName) {
-        if (!inputCarsName.contains(DELIMITER)) {
+    public void validateInputCarNamesContainComma(String inputCarNames) {
+        if (!inputCarNames.contains(DELIMITER)) {
             throw new SingleCarNameException();
         }
     }
 
-    public void validateAllCarNames(String[] splitCarName) {
+    public static void validateAllCarNames(String[] splitCarName) {
 
         validateCarNameOverLengthLimit(splitCarName);
         validateEmptyCarName(splitCarName);
@@ -37,7 +39,7 @@ public class Validator {
 
     private static void validateEmptyCarName(String[] splitCarName) {
         if (Arrays.stream(splitCarName).anyMatch(String::isEmpty)) {
-                throw new EmptyCarNameBetweenCommaException();
+            throw new EmptyCarNameBetweenCommaException();
         }
     }
 
