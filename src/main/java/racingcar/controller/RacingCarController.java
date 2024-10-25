@@ -1,6 +1,5 @@
 package racingcar.controller;
 
-
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +17,7 @@ public class RacingCarController {
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
     Validator validator = new Validator();
+
     public void run() {
 
         String inputCarNames = getInputCarNames();
@@ -26,7 +26,7 @@ public class RacingCarController {
         // TODO: 초기화 전 검증이 가능할까?
         String[] splitCarName = getSplitCarNames(inputCarNames);
 
-        startRace(splitCarName, inputCount);
+        race(splitCarName, inputCount);
     }
 
     private String getInputCarNames() {
@@ -41,21 +41,23 @@ public class RacingCarController {
         return inputCount;
     }
 
+    // TODO: util에 포함? 고민해보기
     private String[] getSplitCarNames(String inputCarNames) {
         String[] splitCarName = Arrays.stream(inputCarNames.split(DELIMITER, -1))
                 .map(String::trim)
                 .toArray(String[]::new);
+
         validator.validateAllCarNames(splitCarName);
         return splitCarName;
     }
 
     // TODO: 메서드 분리
-    private void startRace(String[] splitCarName, int inputCount) {
+    private void race(String[] splitCarName, int inputCount) {
         RacingCars racingCars = new RacingCars();
         Map<String, Integer> cars = racingCars.initializeCars(splitCarName);
 
         for (int count = 0; count < inputCount; count++) {
-            racingCars.race();
+            racingCars.raceOneRound();
             outputView.printOneRoundResult(cars);
         }
 

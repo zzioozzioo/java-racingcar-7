@@ -27,7 +27,7 @@ class WinningTest {
         //when % then
         assertRandomNumberInRangeTest(
                 () -> {
-                    racingCars.race();
+                    racingCars.raceOneRound();
                     winning.calculateWinningScore(cars);
 
                     Set<String> actualWinningCars = winning.getWinningCars(cars);

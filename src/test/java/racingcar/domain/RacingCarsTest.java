@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 class RacingCarsTest {
 
+    private static final int MOVING_FORWARD = 4;
+    private static final int STOP = 3;
+
     @Test
     void 자동차_초기화_테스트() {
         //given
@@ -34,13 +37,13 @@ class RacingCarsTest {
         // when & then
         assertRandomNumberInRangeTest(
                 () -> {
-                    racingCars.race();
+                    racingCars.raceOneRound();
 
                     // then
                     assertThat(cars.get("abc")).isEqualTo(1);  // abc는 전진함
                     assertThat(cars.get("def")).isEqualTo(0);  // def는 전진하지 않음
                 },
-                4, 3
+                MOVING_FORWARD, STOP
         );
     }
 
