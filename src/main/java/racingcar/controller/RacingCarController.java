@@ -4,8 +4,7 @@ import static racingcar.util.Utility.getSplitCarNames;
 
 import java.util.Map;
 import java.util.Set;
-import racingcar.domain.RacingCars;
-import racingcar.domain.Winning;
+import racingcar.service.RacingCarService;
 import racingcar.validator.Validator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -15,9 +14,10 @@ public class RacingCarController {
     // static으로 관리
     public static final String DELIMITER = ",";
 
+    RacingCarService service = new RacingCarService();
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
-    Validator validator = new Validator(); // TODO: 객체 생성 or static 고민해보기
+    Validator validator = new Validator(); // TODO: 객체 생성 or static 중에 고민해보기
 
     public void run() {
 
@@ -45,17 +45,15 @@ public class RacingCarController {
 
     // TODO: 메서드 분리
     private void race(String[] splitCarName, int inputCount) {
-        RacingCars racingCars = new RacingCars();
-        Map<String, Integer> cars = racingCars.initializeCars(splitCarName);
+        Map<String, Integer> cars = service.getNewCars(splitCarName);
 
         for (int count = 0; count < inputCount; count++) {
-            racingCars.raceOneRound();
+            service.oneRound();
             outputView.printOneRoundResult(cars);
         }
 
-        Winning winning = new Winning();
-        winning.calculateWinningScore(cars);
-        Set<String> winningCars = winning.getWinningCars(cars);
+        service.getWinningScore(cars);
+        Set<String> winningCars = service.findWinningCars(cars);
         outputView.printWinningCars(winningCars);
     }
 }
