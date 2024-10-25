@@ -4,6 +4,7 @@ package racingcar.domain;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ class WinningTest {
     @Test
     void 우승자_계산_테스트() {
         //given
-        String[] splitCarName = {"a", "b", "c"};
+        List<String> splitCarName = List.of("a", "b", "c");
         RacingCars racingCars = new RacingCars();
         Map<String, Integer> cars = racingCars.initializeCars(splitCarName);
 
@@ -27,10 +28,10 @@ class WinningTest {
         //when % then
         assertRandomNumberInRangeTest(
                 () -> {
-                    racingCars.raceOneRound();
-                    winning.calculateWinningScore(cars);
+                    racingCars.attemptMoveCarsInOneRound();
+                    winning.findWinningScore(cars);
 
-                    Set<String> actualWinningCars = winning.getWinningCars(cars);
+                    Set<String> actualWinningCars = winning.findWinningCars(cars);
                     assertThat(actualWinningCars).isEqualTo(expectedWinningCars);
                 }
                 , MOVING_FORWARD, STOP, MOVING_FORWARD

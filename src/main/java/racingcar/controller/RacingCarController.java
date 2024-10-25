@@ -4,6 +4,7 @@ import static racingcar.util.Utility.getSplitCarNames;
 import static racingcar.validator.Validator.validateInputCarNamesContainComma;
 import static racingcar.validator.Validator.validateInputCountRange;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import racingcar.service.RacingCarService;
@@ -25,10 +26,9 @@ public class RacingCarController {
         int inputCount = getInputCount();
 
         // TODO: 초기화 전 검증이 가능할까?
-        String[] splitCarName = getSplitCarNames(inputCarNames);
+        List<String> splitCarName = getSplitCarNames(inputCarNames);
 
         race(splitCarName, inputCount);
-
     }
 
     private String getInputCarNames() {
@@ -43,9 +43,7 @@ public class RacingCarController {
         return inputCount;
     }
 
-
-    // TODO: 메서드 분리
-    private void race(String[] splitCarName, int inputCount) {
+    private void race(List<String> splitCarName, int inputCount) {
         Map<String, Integer> cars = service.getNewCars(splitCarName);
         raceAllRound(inputCount, cars);
         printWinners(cars);

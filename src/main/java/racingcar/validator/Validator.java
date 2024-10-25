@@ -2,7 +2,7 @@ package racingcar.validator;
 
 import static racingcar.controller.RacingCarController.DELIMITER;
 
-import java.util.Arrays;
+import java.util.List;
 import racingcar.exception.CarNameOverLengthLimitException;
 import racingcar.exception.EmptyCarNameBetweenCommaException;
 import racingcar.exception.SingleCarNameException;
@@ -21,14 +21,14 @@ public class Validator {
         }
     }
 
-    public static void validateAllCarNames(String[] splitCarName) {
+    public static void validateAllCarNames(List<String> splitCarName) {
 
         validateCarNameOverLengthLimit(splitCarName);
         validateEmptyCarName(splitCarName);
     }
 
-    private static void validateCarNameOverLengthLimit(String[] splitCarName) {
-        Arrays.stream(splitCarName)
+    private static void validateCarNameOverLengthLimit(List<String> splitCarName) {
+        splitCarName.stream()
                 .filter(carName -> carName.length() > 5)
                 .findFirst()
                 .ifPresent(carName -> {
@@ -36,8 +36,8 @@ public class Validator {
                 });
     }
 
-    private static void validateEmptyCarName(String[] splitCarName) {
-        if (Arrays.stream(splitCarName).anyMatch(String::isEmpty)) {
+    private static void validateEmptyCarName(List<String> splitCarName) {
+        if (splitCarName.stream().anyMatch(String::isEmpty)) {
             throw new EmptyCarNameBetweenCommaException();
         }
     }

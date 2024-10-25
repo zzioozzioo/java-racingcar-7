@@ -1,13 +1,12 @@
 package racingcar.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import racingcar.domain.RacingCars;
 import racingcar.domain.Winning;
 
 public class RacingCarService {
-
-    // TODO: 메서드명 수정
 
     RacingCars racingCars;
     Winning winning;
@@ -17,20 +16,19 @@ public class RacingCarService {
         winning = new Winning();
     }
 
-    public Map<String, Integer> getNewCars(String[] splitCarName) {
+    public Map<String, Integer> getNewCars(List<String> splitCarName) {
         return racingCars.initializeCars(splitCarName);
     }
 
-    public void oneRound() {
-        racingCars.raceOneRound();
+    public void raceOneRound() {
+        racingCars.attemptMoveCarsInOneRound();
     }
-
 
     public void getWinningScore(Map<String, Integer> cars) {
-        winning.calculateWinningScore(cars);
+        winning.findWinningScore(cars);
     }
 
-    public Set<String> findWinningCars(Map<String, Integer> cars) {
-        return winning.getWinningCars(cars);
+    public Set<String> getWinningCars(Map<String, Integer> cars) {
+        return winning.findWinningCars(cars);
     }
 }

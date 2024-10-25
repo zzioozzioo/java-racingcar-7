@@ -3,6 +3,7 @@ package racingcar.domain;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ class RacingCarsTest {
     @Test
     void 자동차_초기화_테스트() {
         //given
-        String[] splitCarName = {"abc", "def"};
+        List<String> splitCarName = List.of("abc", "def");
 
         RacingCars racingCars = new RacingCars();
         Map<String, Integer> cars;
@@ -30,14 +31,14 @@ class RacingCarsTest {
     @Test
     void 자동차_전진_테스트() {
         // given
-        String[] carNames = {"abc", "def"};
+        List<String> carNames = List.of("abc", "def");
         RacingCars racingCars = new RacingCars();
         Map<String, Integer> cars = racingCars.initializeCars(carNames);
 
         // when & then
         assertRandomNumberInRangeTest(
                 () -> {
-                    racingCars.raceOneRound();
+                    racingCars.attemptMoveCarsInOneRound();
 
                     // then
                     assertThat(cars.get("abc")).isEqualTo(1);  // abc는 전진함

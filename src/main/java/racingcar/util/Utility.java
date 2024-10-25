@@ -1,19 +1,21 @@
 package racingcar.util;
 
 import static racingcar.controller.RacingCarController.DELIMITER;
+import static racingcar.validator.Validator.validateAllCarNames;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
-import racingcar.validator.Validator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Utility {
 
-    public static String[] getSplitCarNames(String inputCarNames) {
-        String[] splitCarName = Arrays.stream(inputCarNames.split(DELIMITER, -1))
+    public static List<String> getSplitCarNames(String inputCarNames) {
+        List<String> splitCarName = Arrays.stream(inputCarNames.split(DELIMITER, -1))
                 .map(String::trim)
-                .toArray(String[]::new);
+                .collect(Collectors.toList());
 
-        Validator.validateAllCarNames(splitCarName);
+        validateAllCarNames(splitCarName);
         return splitCarName;
     }
 
