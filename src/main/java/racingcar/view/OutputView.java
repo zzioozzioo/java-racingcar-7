@@ -22,6 +22,6 @@ public class OutputView {
         String carName = carEntry.getKey();
         Integer nowScore = carEntry.getValue();
 
-        System.out.println(carName + " : " + "-".repeat(nowScore));
+        System.out.println(String.format("%s : %s", carName, "-".repeat(nowScore)));
     }
 }
