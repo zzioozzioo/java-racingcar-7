@@ -1,23 +1,23 @@
 package racingcar.controller;
 
 import static racingcar.util.Utility.getSplitCarNames;
+import static racingcar.validator.Validator.validateInputCarNamesContainComma;
+import static racingcar.validator.Validator.validateInputCountRange;
 
 import java.util.Map;
 import java.util.Set;
 import racingcar.service.RacingCarService;
-import racingcar.validator.Validator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class RacingCarController {
 
-    // static으로 관리
+    // TODO: enum 타입으로 관리 고려해보기
     public static final String DELIMITER = ",";
 
     RacingCarService service = new RacingCarService();
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
-    Validator validator = new Validator(); // TODO: 객체 생성 or static 중에 고민해보기
 
     public void run() {
 
@@ -28,17 +28,18 @@ public class RacingCarController {
         String[] splitCarName = getSplitCarNames(inputCarNames);
 
         race(splitCarName, inputCount);
+
     }
 
     private String getInputCarNames() {
         String inputCarNames = inputView.readCarNames();
-        validator.validateInputCarNamesContainComma(inputCarNames);
+        validateInputCarNamesContainComma(inputCarNames);
         return inputCarNames;
     }
 
     private int getInputCount() {
         int inputCount = inputView.readTryCount();
-        validator.validateInputCountRange(inputCount);
+        validateInputCountRange(inputCount);
         return inputCount;
     }
 
@@ -46,14 +47,20 @@ public class RacingCarController {
     // TODO: 메서드 분리
     private void race(String[] splitCarName, int inputCount) {
         Map<String, Integer> cars = service.getNewCars(splitCarName);
+        raceAllRound(inputCount, cars);
+        printWinners(cars);
+    }
 
+    private void raceAllRound(int inputCount, Map<String, Integer> cars) {
         for (int count = 0; count < inputCount; count++) {
-            service.oneRound();
+            service.raceOneRound();
             outputView.printOneRoundResult(cars);
         }
+    }
 
+    private void printWinners(Map<String, Integer> cars) {
         service.getWinningScore(cars);
-        Set<String> winningCars = service.findWinningCars(cars);
+        Set<String> winningCars = service.getWinningCars(cars);
         outputView.printWinningCars(winningCars);
     }
 }

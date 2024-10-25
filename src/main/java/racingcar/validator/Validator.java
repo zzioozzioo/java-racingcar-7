@@ -12,11 +12,10 @@ public class Validator {
 
     // TODO: static 클래스? 고민해보기
 
-    final int MIN_TRY_COUNT = 1;
-    final int MAX_TRY_COUNT = 100; // TODO: 수정 가능, 고민해보기
+    final static int MIN_TRY_COUNT = 1;
+    final static int MAX_TRY_COUNT = 100; // TODO: 수정 가능, 고민해보기
 
-    //
-    public void validateInputCarNamesContainComma(String inputCarNames) {
+    public static void validateInputCarNamesContainComma(String inputCarNames) {
         if (!inputCarNames.contains(DELIMITER)) {
             throw new SingleCarNameException();
         }
@@ -43,7 +42,7 @@ public class Validator {
         }
     }
 
-    public void validateInputCountRange(int inputCount) {
+    public static void validateInputCountRange(int inputCount) {
 
         if (inputCount < MIN_TRY_COUNT || inputCount > MAX_TRY_COUNT) {
             throw new TryCountException();
