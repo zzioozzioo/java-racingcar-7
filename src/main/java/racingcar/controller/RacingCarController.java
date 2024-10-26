@@ -25,10 +25,10 @@ public class RacingCarController {
         String inputCarNames = getInputCarNames();
         int inputCount = getInputCount();
 
-        // TODO: 초기화 전 검증이 가능할까?
-        List<String> splitCarName = getSplitCarNames(inputCarNames);
+        // TODO: 초기화 전 검증이 가능할까? 아마 안 될 듯... 자른 뒤에 검증해야 하는 거라..
+        List<String> splitCarNames = getSplitCarNames(inputCarNames);
 
-        race(splitCarName, inputCount);
+        race(splitCarNames, inputCount);
     }
 
     private String getInputCarNames() {
@@ -43,8 +43,8 @@ public class RacingCarController {
         return inputCount;
     }
 
-    private void race(List<String> splitCarName, int inputCount) {
-        Map<String, Integer> cars = service.getNewCars(splitCarName);
+    private void race(List<String> splitCarNames, int inputCount) {
+        Map<String, Integer> cars = service.getNewCars(splitCarNames);
         raceAllRound(inputCount, cars);
         printWinners(cars);
     }
@@ -57,7 +57,7 @@ public class RacingCarController {
     }
 
     private void printWinners(Map<String, Integer> cars) {
-        service.getWinningScore(cars);
+        service.getMaxPosition(cars);
         Set<String> winningCars = service.getWinningCars(cars);
         outputView.printWinningCars(winningCars);
     }

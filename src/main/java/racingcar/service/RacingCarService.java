@@ -16,16 +16,16 @@ public class RacingCarService {
         winning = new Winning();
     }
 
-    public Map<String, Integer> getNewCars(List<String> splitCarName) {
-        return racingCars.initializeCars(splitCarName);
+    public Map<String, Integer> getNewCars(List<String> splitCarNames) {
+        return racingCars.initializeCars(splitCarNames);
     }
 
     public void raceOneRound() {
         racingCars.attemptMoveCarsInOneRound();
     }
 
-    public void getWinningScore(Map<String, Integer> cars) {
-        winning.findWinningScore(cars);
+    public void getMaxPosition(Map<String, Integer> cars) {
+        winning.findMaxPosition(cars);
     }
 
     public Set<String> getWinningCars(Map<String, Integer> cars) {

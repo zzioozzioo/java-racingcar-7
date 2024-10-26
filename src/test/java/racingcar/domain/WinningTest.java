@@ -29,7 +29,7 @@ class WinningTest {
         assertRandomNumberInRangeTest(
                 () -> {
                     racingCars.attemptMoveCarsInOneRound();
-                    winning.findWinningScore(cars);
+                    winning.findMaxPosition(cars);
 
                     Set<String> actualWinningCars = winning.findWinningCars(cars);
                     assertThat(actualWinningCars).isEqualTo(expectedWinningCars);

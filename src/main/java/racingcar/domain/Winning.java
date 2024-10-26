@@ -8,16 +8,16 @@ import java.util.stream.Collectors;
 
 public class Winning {
 
-    private int winningScore;
+    private int maxPosition;
 
-    public void calculateWinningScore(Map<String, Integer> cars) {
-        winningScore = Collections.max(cars.values());
+    public void findMaxPosition(Map<String, Integer> cars) {
+        maxPosition = Collections.max(cars.values());
     }
 
-    public Set<String> getWinningCars(Map<String, Integer> cars) {
+    public Set<String> findWinningCars(Map<String, Integer> cars) {
 
         return cars.entrySet().stream()
-                .filter(car -> car.getValue() == winningScore)
+                .filter(car -> car.getValue() == maxPosition)
                 .map(Entry::getKey)
                 .collect(Collectors.toSet());
 
