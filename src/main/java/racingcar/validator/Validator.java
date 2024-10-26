@@ -2,7 +2,6 @@ package racingcar.validator;
 
 import static racingcar.controller.RacingCarController.DELIMITER;
 
-import java.util.List;
 import racingcar.exception.CarNameOverLengthLimitException;
 import racingcar.exception.EmptyCarNameBetweenCommaException;
 import racingcar.exception.SingleCarNameException;
@@ -14,6 +13,7 @@ public class Validator {
 
     final static int MIN_TRY_COUNT = 1;
     final static int MAX_TRY_COUNT = 100; // TODO: 수정 가능, 고민해보기
+    final static int MAX_LENGTH_LIMIT_OF_CAR_NAME = 5;
 
     public static void validateInputCarNamesContainComma(String inputCarNames) {
         if (!inputCarNames.contains(DELIMITER)) {
@@ -21,23 +21,20 @@ public class Validator {
         }
     }
 
-    public static void validateAllCarNames(List<String> splitCarName) {
+    public static void validateAllCarNames(String carName) {
 
-        validateCarNameOverLengthLimit(splitCarName);
-        validateEmptyCarName(splitCarName);
+        validateCarNameOverLengthLimit(carName);
+        validateEmptyCarName(carName);
     }
 
-    private static void validateCarNameOverLengthLimit(List<String> splitCarName) {
-        splitCarName.stream()
-                .filter(carName -> carName.length() > 5)
-                .findFirst()
-                .ifPresent(carName -> {
-                    throw new CarNameOverLengthLimitException();
-                });
+    private static void validateCarNameOverLengthLimit(String carName) {
+        if (carName.length() > MAX_LENGTH_LIMIT_OF_CAR_NAME) {
+            throw new CarNameOverLengthLimitException();
+        }
     }
 
-    private static void validateEmptyCarName(List<String> splitCarName) {
-        if (splitCarName.stream().anyMatch(String::isEmpty)) {
+    private static void validateEmptyCarName(String carName) {
+        if (carName.isEmpty()) {
             throw new EmptyCarNameBetweenCommaException();
         }
     }
