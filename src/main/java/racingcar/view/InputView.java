@@ -1,6 +1,6 @@
 package racingcar.view;
 
-import static racingcar.controller.RacingCarController.COMMA;
+import static racingcar.util.Delimiter.COMMA;
 
 import camp.nextstep.edu.missionutils.Console;
 import racingcar.exception.NonNumericException;
@@ -8,7 +8,7 @@ import racingcar.exception.NonNumericException;
 public class InputView {
 
     public String readCarNames() {
-        System.out.println(String.format("경주할 자동차 이름을 입력하세요.(이름은 쉼표(%s) 기준으로 구분)", COMMA));
+        System.out.println(String.format("경주할 자동차 이름을 입력하세요.(이름은 쉼표(%s) 기준으로 구분)", COMMA.getDelimiter()));
         return Console.readLine();
     }
 

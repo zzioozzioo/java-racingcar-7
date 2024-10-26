@@ -13,9 +13,6 @@ import racingcar.view.OutputView;
 
 public class RacingCarController {
 
-    // TODO: enum 타입으로 관리 고려해보기
-    public static final String COMMA = ",";
-
     RacingCarService service = new RacingCarService();
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();

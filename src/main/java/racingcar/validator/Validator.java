@@ -1,6 +1,7 @@
 package racingcar.validator;
 
-import static racingcar.controller.RacingCarController.DELIMITER;
+
+import static racingcar.util.Delimiter.COMMA;
 
 import racingcar.exception.CarNameOverLengthLimitException;
 import racingcar.exception.EmptyCarNameBetweenCommaException;
@@ -9,14 +10,12 @@ import racingcar.exception.TryCountException;
 
 public class Validator {
 
-    // TODO: static 클래스? 고민해보기
-
-    final static int MIN_TRY_COUNT = 1;
-    final static int MAX_TRY_COUNT = 100; // TODO: 수정 가능, 고민해보기
-    final static int MAX_LENGTH_LIMIT_OF_CAR_NAME = 5;
+    private final static int MIN_TRY_COUNT = 1;
+    private final static int MAX_TRY_COUNT = 100; // TODO: 수정 가능, 고민해보기
+    private final static int MAX_LENGTH_LIMIT_OF_CAR_NAME = 5;
 
     public static void validateInputCarNamesContainComma(String inputCarNames) {
-        if (!inputCarNames.contains(DELIMITER)) {
+        if (!inputCarNames.contains(COMMA.getDelimiter())) {
             throw new SingleCarNameException();
         }
     }
