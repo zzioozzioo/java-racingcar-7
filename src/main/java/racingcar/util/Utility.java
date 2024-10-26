@@ -1,6 +1,6 @@
 package racingcar.util;
 
-import static racingcar.controller.RacingCarController.DELIMITER;
+import static racingcar.controller.RacingCarController.COMMA;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
@@ -12,7 +12,7 @@ public class Utility {
 
     public static List<String> getSplitCarNames(String inputCarNames) {
 
-        return Arrays.stream(inputCarNames.split(DELIMITER, -1))
+        return Arrays.stream(inputCarNames.split(COMMA, -1))
                 .map(String::trim)
                 .peek(Validator::validateAllCarNames)
                 .collect(Collectors.toList());

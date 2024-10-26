@@ -14,7 +14,7 @@ import racingcar.view.OutputView;
 public class RacingCarController {
 
     // TODO: enum 타입으로 관리 고려해보기
-    public static final String DELIMITER = ",";
+    public static final String COMMA = ",";
 
     RacingCarService service = new RacingCarService();
     InputView inputView = new InputView();
@@ -25,9 +25,7 @@ public class RacingCarController {
         String inputCarNames = getInputCarNames();
         int inputCount = getInputCount();
 
-        // TODO: 초기화 전 검증이 가능할까? 아마 안 될 듯... 자른 뒤에 검증해야 하는 거라..
         List<String> splitCarNames = getSplitCarNames(inputCarNames);
-
         race(splitCarNames, inputCount);
     }
 
