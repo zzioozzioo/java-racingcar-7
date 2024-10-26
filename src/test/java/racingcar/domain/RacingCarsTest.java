@@ -5,31 +5,33 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class RacingCarsTest {
 
     private static final int MOVING_FORWARD = 4;
     private static final int STOP = 3;
 
-    @Test
-    void 자동차_초기화_테스트() {
+    @ParameterizedTest
+    @ValueSource(strings = {"abc", "def"})
+    void 자동차_초기화_테스트(String carName) {
         //given
         List<String> splitCarName = List.of("abc", "def");
-
         RacingCars racingCars = new RacingCars();
-        Map<String, Integer> cars;
 
         //when
-        cars = racingCars.initializeCars(splitCarName);
+        Map<String, Integer> cars = racingCars.initializeCars(splitCarName);
 
         //then
         assertThat(cars.size()).isEqualTo(2);
-        // TODO: 각 key의 value가 0인 것도 테스트하기
+        assertThat(cars.get(carName)).isEqualTo(0);
     }
 
-    @Test
-    void 자동차_전진_테스트() {
+    @ParameterizedTest
+    @CsvSource(value = {"abc, 1", "def, 0"})
+    void 자동차_전진_테스트(String carName, int position) {
         // given
         List<String> carNames = List.of("abc", "def");
         RacingCars racingCars = new RacingCars();
@@ -41,8 +43,7 @@ class RacingCarsTest {
                     racingCars.attemptMoveCarsInOneRound();
 
                     // then
-                    assertThat(cars.get("abc")).isEqualTo(1);  // abc는 전진함
-                    assertThat(cars.get("def")).isEqualTo(0);  // def는 전진하지 않음
+                    assertThat(cars.get(carName)).isEqualTo(position);
                 },
                 MOVING_FORWARD, STOP
         );
