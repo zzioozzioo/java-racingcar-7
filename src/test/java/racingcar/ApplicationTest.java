@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ApplicationTest extends NsTest {
     private static final int MOVING_FORWARD = 4;
@@ -57,29 +60,28 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class));
     }
 
-    @Test
-    void 이름에_공백이_있는_경우() {
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "b", "c"})
+    void 이름에_공백이_있는_경우(String carName) {
         assertSimpleTest(() -> {
             run("a , b,c", "2");
-            assertThat(output()).contains("a : ");
-            assertThat(output()).contains("b : ");
-            assertThat(output()).contains("c : ");
+            assertThat(output()).contains(String.format("%s : ", carName));
         });
     }
 
-    @Test
-    void 시도할_횟수가_숫자가_아닌_경우() {
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "ㄱ", "#"})
+    void 시도할_횟수가_숫자가_아닌_경우(String tryCount) {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("abc", "a"))
+                assertThatThrownBy(() -> runException("abc", tryCount))
                         .isInstanceOf(IllegalArgumentException.class));
     }
 
-    @Test
-    void 시도할_횟수가_1_미만이거나_100_초과인_경우() {
+    @ParameterizedTest
+    @CsvSource({"qwe, rty, 0", "qwe, rty, 101"})
+    void 시도할_횟수가_범위에서_벗어난_경우(String carName1, String carName2, String tryCount) {
         assertAll(
-                () -> assertThatThrownBy(() -> runException("qwe, rty", "0"))
-                        .isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> runException("qwe, rty", "101"))
+                () -> assertThatThrownBy(() -> runException(carName1, carName2, tryCount))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
