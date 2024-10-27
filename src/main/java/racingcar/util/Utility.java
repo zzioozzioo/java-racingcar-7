@@ -1,6 +1,7 @@
 package racingcar.util;
 
 import static racingcar.util.Delimiter.COMMA;
+import static racingcar.validator.Validator.validateCarCountLimit;
 import static racingcar.validator.Validator.validateDuplicateCarName;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -10,7 +11,6 @@ import racingcar.validator.Validator;
 
 public class Utility {
 
-    // TODO: 자동차 몇 대까지 가능? 고민해보기
     public static List<String> getSplitCarNames(String inputCarNames) {
 
         List<String> carNames = Arrays.stream(inputCarNames.split(COMMA.getDelimiter(), -1))
@@ -18,6 +18,7 @@ public class Utility {
                 .peek(Validator::validateAllCarNames)
                 .toList();
 
+        validateCarCountLimit(carNames);
         validateDuplicateCarName(carNames);
 
         return carNames;
