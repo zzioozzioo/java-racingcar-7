@@ -1,6 +1,7 @@
 package racingcar.view;
 
 import static racingcar.util.Delimiter.COMMA;
+import static racingcar.util.MoveSymbol.DASH;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -27,6 +28,6 @@ public class OutputView {
         String carName = carEntry.getKey();
         Integer nowScore = carEntry.getValue();
 
-        System.out.println(String.format("%s : %s", carName, "-".repeat(nowScore)));
+        System.out.println(String.format("%s : %s", carName, DASH.getSymbol().repeat(nowScore)));
     }
 }
