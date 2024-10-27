@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningTest {
@@ -17,6 +18,7 @@ class WinningTest {
 
 
     @Test
+    @DisplayName("가장 많이 움직인 자동차가 우승자인지 확인")
     void 우승자_계산_테스트() {
         //given
         Map<String, Integer> racingCarsMap = new HashMap<>();

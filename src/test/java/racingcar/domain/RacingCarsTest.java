@@ -6,6 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -17,6 +18,7 @@ class RacingCarsTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"abc", "def"})
+    @DisplayName("경주할 자동차가 정상적으로 초기화되는지 확인")
     void 자동차_초기화_테스트(String carName) {
         //given
         Map<String, Integer> racingCarsMap = new HashMap<>();
@@ -33,6 +35,7 @@ class RacingCarsTest {
 
     @ParameterizedTest
     @CsvSource(value = {"abc, 1", "def, 0"})
+    @DisplayName("자동차가 조건에 맞게 전진하는지 확인")
     void 자동차_전진_테스트(String carName, int position) {
         // given
         Map<String, Integer> racingCarsMap = new HashMap<>();

@@ -7,12 +7,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class ApplicationTest extends NsTest {
+
+    // TODO: 테스트용 상수 관리 고민해보기
     private static final int MOVING_FORWARD = 4;
     private static final int STOP = 3;
 
@@ -38,7 +41,8 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 이름이_5자_초과인_경우() {
+    @DisplayName("이름이 5자 초과인 경우")
+    void 자동차_이름_예외_테스트_1() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("qwerty,abc", "2"))
                         .isInstanceOf(IllegalArgumentException.class));
@@ -46,7 +50,8 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 자동차_이름을_1개만_입력한_경우() {
+    @DisplayName("이름이 1개만 입력한 경우")
+    void 자동차_이름_예외_테스트_2() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("qwert", "2"))
                         .isInstanceOf(IllegalArgumentException.class));
@@ -54,15 +59,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 쉼표와_쉼표_사이에_이름을_입력하지_않은_경우() {
+    @DisplayName("쉼표와 쉼표 사이에 이름을 입력하지 않은 경우")
+    void 자동차_이름_예외_테스트_3() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("qwe,,abc", "3"))
                         .isInstanceOf(IllegalArgumentException.class));
     }
 
+    // TODO: ApplicationTest의 성격에 맞는 테스트인가? ValidatorTest 아닌가..?
     @ParameterizedTest
     @ValueSource(strings = {"a", "b", "c"})
-    void 이름에_공백이_있는_경우(String carName) {
+    @DisplayName("이름 앞,뒤에 공백이 있는 경우")
+    void 기능_테스트_이름(String carName) {
         assertSimpleTest(() -> {
             run("a , b,c", "2");
             assertThat(output()).contains(String.format("%s : ", carName));
@@ -70,8 +78,19 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"a b", "c d", "e"})
+    @DisplayName("이름에 공백이 포함된 경우")
+    void 기능_테스트_이름_2(String carName) {
+        assertSimpleTest(() -> {
+            run("a b, c d, e", "2");
+            assertThat(output()).contains(String.format("%s : ", carName));
+        });
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"a", "ㄱ", "#"})
-    void 시도할_횟수가_숫자가_아닌_경우(String tryCount) {
+    @DisplayName("시도할 횟수가 숫자가 아닌 경우")
+    void 시도_횟수_예외_테스트_1(String tryCount) {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("abc", tryCount))
                         .isInstanceOf(IllegalArgumentException.class));
@@ -79,7 +98,8 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @CsvSource({"qwe, rty, 0", "qwe, rty, 101"})
-    void 시도할_횟수가_범위에서_벗어난_경우(String carName1, String carName2, String tryCount) {
+    @DisplayName("시도할 횟수가 범위에서 벗어난 경우")
+    void 시도_횟수_예외_테스트_2(String carName1, String carName2, String tryCount) {
         assertAll(
                 () -> assertThatThrownBy(() -> runException(carName1, carName2, tryCount))
                         .isInstanceOf(IllegalArgumentException.class)
