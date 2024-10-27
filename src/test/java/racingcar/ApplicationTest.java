@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
 
-    // TODO: 테스트용 상수 관리 고민해보기
     private static final int MOVING_FORWARD = 4;
     private static final int STOP = 3;
 
@@ -32,26 +31,6 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
-//    @ParameterizedTest
-//    @ValueSource(strings = {"a", "b", "c"})
-//    @DisplayName("이름 앞,뒤에 공백이 있는 경우")
-//    void 기능_테스트_이름(String carName) {
-//        assertSimpleTest(() -> {
-//            run("a , b,c", "2");
-//            assertThat(output()).contains(String.format("%s : ", carName));
-//        });
-//    }
-//
-//    @ParameterizedTest
-//    @ValueSource(strings = {"a b", "c d", "e"})
-//    @DisplayName("이름에 공백이 포함된 경우")
-//    void 기능_테스트_이름_2(String carName) {
-//        assertSimpleTest(() -> {
-//            run("a b, c d, e", "2");
-//            assertThat(output()).contains(String.format("%s : ", carName));
-//        });
-//    }
 
     @Override
     public void runMain() {
