@@ -23,7 +23,7 @@ public class InputView {
 
         try {
             inputCount = Integer.parseInt(Console.readLine());
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NoSuchElementException e) {
             throw new NonNumericException();
         }
 
