@@ -2,6 +2,8 @@ package racingcar.validator;
 
 
 import static racingcar.util.Delimiter.COMMA;
+import static racingcar.util.TryCount.MAX;
+import static racingcar.util.TryCount.MIN;
 
 import racingcar.exception.CarNameOverLengthLimitException;
 import racingcar.exception.EmptyCarNameBetweenCommaException;
@@ -10,8 +12,6 @@ import racingcar.exception.TryCountException;
 
 public class Validator {
 
-    private final static int MIN_TRY_COUNT = 1;
-    private final static int MAX_TRY_COUNT = 100; // TODO: 수정 가능, 고민해보기
     private final static int MAX_LENGTH_LIMIT_OF_CAR_NAME = 5;
 
     public static void validateInputCarNamesContainComma(String inputCarNames) {
@@ -40,7 +40,7 @@ public class Validator {
 
     public static void validateInputCountRange(int inputCount) {
 
-        if (inputCount < MIN_TRY_COUNT || inputCount > MAX_TRY_COUNT) {
+        if (inputCount < MIN.getTryCount() || inputCount > MAX.getTryCount()) {
             throw new TryCountException();
         }
     }
