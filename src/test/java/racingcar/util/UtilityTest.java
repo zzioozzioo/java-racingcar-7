@@ -2,6 +2,7 @@ package racingcar.util;
 
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static racingcar.util.Delimiter.COMMA;
 
 import java.util.List;
@@ -33,11 +34,21 @@ class UtilityTest {
     })
     @DisplayName("이름 앞, 뒤에 공백이 있는 경우")
     void 이름_앞뒤_공백_테스트(String inputCarNames, String expectedCarNames) {
-
+        //given & when
         List<String> carNamesList = Utility.getSplitCarNames(inputCarNames);
 
         //then
         assertThat(carNamesList).isEqualTo(List.of(expectedCarNames.split(COMMA.getDelimiter())));
     }
 
+    @Test
+    @DisplayName("이름에 중복이 존재하는 경우")
+    void 이름_중복_테스트() {
+        //given
+        String inputCarNames = "a,a,b";
+
+        //when & then
+        assertThatThrownBy(() -> Utility.getSplitCarNames(inputCarNames))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
