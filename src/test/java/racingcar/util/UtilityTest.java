@@ -41,6 +41,22 @@ class UtilityTest {
         assertThat(carNamesList).isEqualTo(List.of(expectedCarNames.split(COMMA.getDelimiter())));
     }
 
+    // TODO: UtilityTest, ValidatorTest 중 어디에 포함시킬지 고민해보기
+    // TODO: IllegalArgumentException or CarCountOutOfBoundsException
+    //  중 어떤 예외 발생시킬지 고민해보기
+    @Test
+    @DisplayName("경주 가능한 최대 차 개수를 초과한 경우")
+    void 최대_차_개수_초과_테스트() {
+        //given
+        String inputCarNames = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
+
+        //when
+        assertThatThrownBy(() -> Utility.getSplitCarNames(inputCarNames))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        //then
+    }
+
     @Test
     @DisplayName("이름에 중복이 존재하는 경우")
     void 이름_중복_테스트() {
