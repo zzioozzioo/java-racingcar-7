@@ -28,9 +28,9 @@ public class RacingCarController {
     public void run() {
 
         String inputCarNames = getInputCarNames();
-        int inputCount = getInputCount();
-
         List<String> splitCarNames = getSplitCarNames(inputCarNames);
+
+        int inputCount = getInputCount();
 
         Map<String, Integer> cars = service.getNewCars(splitCarNames);
         race(inputCount, cars);
