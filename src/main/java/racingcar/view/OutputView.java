@@ -7,8 +7,11 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class OutputView {
+
+    private final String FINAL_WINNER = "최종 우승자 : ";
+
     public void printWinningCars(Set<String> winningCars) {
-        System.out.print("최종 우승자 : ");
+        System.out.print(FINAL_WINNER);
         System.out.println(String.join(COMMA.getDelimiter() + " ", winningCars));
     }
 
