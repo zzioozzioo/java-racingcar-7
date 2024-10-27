@@ -31,7 +31,10 @@ public class RacingCarController {
         int inputCount = getInputCount();
 
         List<String> splitCarNames = getSplitCarNames(inputCarNames);
-        race(splitCarNames, inputCount);
+
+        Map<String, Integer> cars = service.getNewCars(splitCarNames);
+        race(inputCount, cars);
+        printWinners(cars);
     }
 
     private String getInputCarNames() {
@@ -46,13 +49,7 @@ public class RacingCarController {
         return inputCount;
     }
 
-    private void race(List<String> splitCarNames, int inputCount) {
-        Map<String, Integer> cars = service.getNewCars(splitCarNames);
-        raceAllRound(inputCount, cars);
-        printWinners(cars);
-    }
-
-    private void raceAllRound(int inputCount, Map<String, Integer> cars) {
+    private void race(int inputCount, Map<String, Integer> cars) {
         for (int count = 0; count < inputCount; count++) {
             service.raceOneRound();
             outputView.printOneRoundResult(cars);
