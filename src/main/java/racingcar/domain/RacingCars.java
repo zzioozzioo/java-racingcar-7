@@ -2,18 +2,20 @@ package racingcar.domain;
 
 import static racingcar.util.Utility.checkMoveOrNot;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class RacingCars {
 
-    private final Map<String, Integer> racingCars = new HashMap<>();
+    private final Map<String, Integer> racingCars;
 
+    public RacingCars(Map<String, Integer> racingCars) {
+        this.racingCars = racingCars;
+    }
 
-    public Map<String, Integer> initializeCars(List<String> splitCarName) {
+    public Map<String, Integer> initializeCars(List<String> splitCarNames) {
 
-        splitCarName.forEach(carName -> racingCars.put(carName, 0));
+        splitCarNames.forEach(carName -> racingCars.put(carName, 0));
 
         return racingCars;
     }

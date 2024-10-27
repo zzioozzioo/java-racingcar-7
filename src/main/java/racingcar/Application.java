@@ -1,5 +1,7 @@
 package racingcar;
 
+import java.util.HashMap;
+import java.util.Map;
 import racingcar.controller.RacingCarController;
 import racingcar.domain.RacingCars;
 import racingcar.domain.Winning;
@@ -11,7 +13,9 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        RacingCars racingCars = new RacingCars();
+        Map<String, Integer> racingCarsMap = new HashMap<>();
+
+        RacingCars racingCars = new RacingCars(racingCarsMap);
         Winning winning = new Winning();
 
         RacingCarService service = new RacingCarService(racingCars, winning);

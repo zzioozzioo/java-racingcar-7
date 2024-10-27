@@ -4,6 +4,7 @@ package racingcar.domain;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,8 +19,9 @@ class WinningTest {
     @Test
     void 우승자_계산_테스트() {
         //given
+        Map<String, Integer> racingCarsMap = new HashMap<>();
         List<String> splitCarName = List.of("a", "b", "c");
-        RacingCars racingCars = new RacingCars();
+        RacingCars racingCars = new RacingCars(racingCarsMap);
         Map<String, Integer> cars = racingCars.initializeCars(splitCarName);
 
         Winning winning = new Winning();

@@ -3,6 +3,7 @@ package racingcar.domain;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,8 +19,9 @@ class RacingCarsTest {
     @ValueSource(strings = {"abc", "def"})
     void 자동차_초기화_테스트(String carName) {
         //given
+        Map<String, Integer> racingCarsMap = new HashMap<>();
         List<String> splitCarName = List.of("abc", "def");
-        RacingCars racingCars = new RacingCars();
+        RacingCars racingCars = new RacingCars(racingCarsMap);
 
         //when
         Map<String, Integer> cars = racingCars.initializeCars(splitCarName);
@@ -33,8 +35,9 @@ class RacingCarsTest {
     @CsvSource(value = {"abc, 1", "def, 0"})
     void 자동차_전진_테스트(String carName, int position) {
         // given
+        Map<String, Integer> racingCarsMap = new HashMap<>();
         List<String> carNames = List.of("abc", "def");
-        RacingCars racingCars = new RacingCars();
+        RacingCars racingCars = new RacingCars(racingCarsMap);
         Map<String, Integer> cars = racingCars.initializeCars(carNames);
 
         // when & then
