@@ -5,7 +5,11 @@ import static racingcar.util.Delimiter.COMMA;
 import static racingcar.util.TryCount.MAX;
 import static racingcar.util.TryCount.MIN;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import racingcar.exception.CarNameOverLengthLimitException;
+import racingcar.exception.DuplicateCarNameException;
 import racingcar.exception.EmptyCarNameBetweenCommaException;
 import racingcar.exception.SingleCarNameException;
 import racingcar.exception.TryCountException;
@@ -35,6 +39,14 @@ public class Validator {
     private static void validateEmptyCarName(String carName) {
         if (carName.isEmpty()) {
             throw new EmptyCarNameBetweenCommaException();
+        }
+    }
+
+    public static void validateDuplicateCarName(List<String> carNames) {
+        Set<String> uniqueCarNames = new HashSet<>(carNames);
+
+        if (carNames.size() > uniqueCarNames.size()) {
+            throw new DuplicateCarNameException();
         }
     }
 
