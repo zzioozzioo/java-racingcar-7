@@ -8,12 +8,12 @@ import racingcar.domain.Winning;
 
 public class RacingCarService {
 
-    RacingCars racingCars;
-    Winning winning;
+    private final RacingCars racingCars;
+    private final Winning winning;
 
-    public RacingCarService() {
-        racingCars = new RacingCars();
-        winning = new Winning();
+    public RacingCarService(RacingCars racingCars, Winning winning) {
+        this.racingCars = racingCars;
+        this.winning = winning;
     }
 
     public Map<String, Integer> getNewCars(List<String> splitCarNames) {

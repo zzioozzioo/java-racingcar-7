@@ -13,9 +13,17 @@ import racingcar.view.OutputView;
 
 public class RacingCarController {
 
-    RacingCarService service = new RacingCarService();
-    InputView inputView = new InputView();
-    OutputView outputView = new OutputView();
+    // TODO: 의존성 주입 고민해보기
+
+    private final OutputView outputView;
+    private final RacingCarService service;
+    private final InputView inputView;
+
+    public RacingCarController(RacingCarService service, InputView inputView, OutputView outputView) {
+        this.service = service;
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     public void run() {
 
