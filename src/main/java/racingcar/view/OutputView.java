@@ -1,5 +1,7 @@
 package racingcar.view;
 
+import static racingcar.util.Delimiter.COMMA;
+
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -7,7 +9,7 @@ import java.util.Set;
 public class OutputView {
     public void printWinningCars(Set<String> winningCars) {
         System.out.print("최종 우승자 : ");
-        System.out.println(String.join(", ", winningCars));
+        System.out.println(String.join(COMMA.getDelimiter() + " ", winningCars));
     }
 
     public void printOneRoundResult(Map<String, Integer> racingCar) {
