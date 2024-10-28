@@ -96,19 +96,19 @@
 
 ### 제출 전 확인 리스트
 
-- [ ] JDK-21 사용
-- [ ] 프로그램 실행의 시작점은 `Application`의 `main()`
-- [ ] `build.gradle` 변경 불가, 제공된 라이브러리만 사용
-- [ ] [Java Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java)를 준수하며 프로그래밍
-- [ ] 프로그램 종료 시`System.exit()`를 호출 X
-- [ ] 프로그램 구현 완료 시 `ApplicationTest`의 모든 테스트가 성공
-- [ ] 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동 X
-- [ ] indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현(2까지만 허용)
-- [ ] 3항 연산자 사용 X
-- [ ] 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들기
-- [ ] JUnit 5와 AssertJ를 이용하여 정리한 기능 목록이 정상적으로 작동하는지 테스트 코드로 확인
+- [x] JDK-21 사용
+- [x] 프로그램 실행의 시작점은 `Application`의 `main()`
+- [x] `build.gradle` 변경 불가, 제공된 라이브러리만 사용
+- [x] [Java Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java)를 준수하며 프로그래밍
+- [x] 프로그램 종료 시`System.exit()`를 호출 X
+- [x] 프로그램 구현 완료 시 `ApplicationTest`의 모든 테스트가 성공
+- [x] 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동 X
+- [x] indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현(2까지만 허용)
+- [x] 3항 연산자 사용 X
+- [x] 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들기
+- [x] JUnit 5와 AssertJ를 이용하여 정리한 기능 목록이 정상적으로 작동하는지 테스트 코드로 확인
 
 ### 라이브러리 요구 사항
 
-- [ ] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현
-- [ ] 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용
+- [x] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현
+- [x] 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용
