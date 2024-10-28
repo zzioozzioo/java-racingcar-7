@@ -7,6 +7,7 @@ import static racingcar.validator.Validator.validateInputCountRange;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.IntStream;
 import racingcar.service.RacingCarService;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -48,10 +49,10 @@ public class RacingCarController {
     }
 
     private void race(int inputCount, Map<String, Integer> cars) {
-        for (int count = 0; count < inputCount; count++) {
+        IntStream.range(0, inputCount).forEach(count -> {
             service.raceOneRound();
             outputView.printOneRoundResult(cars);
-        }
+        });
     }
 
     private void printWinners(Map<String, Integer> cars) {
