@@ -13,8 +13,6 @@ import racingcar.view.OutputView;
 
 public class RacingCarController {
 
-    // TODO: 의존성 주입 고민해보기
-
     private final OutputView outputView;
     private final RacingCarService service;
     private final InputView inputView;
