@@ -13,7 +13,7 @@ import racingcar.exception.CarNameOverLengthLimitException;
 import racingcar.exception.DuplicateCarNameException;
 import racingcar.exception.EmptyCarNameBetweenCommaException;
 import racingcar.exception.SingleCarNameException;
-import racingcar.exception.TryCountException;
+import racingcar.exception.TryCountOutOfRangeException;
 
 public class Validator {
 
@@ -61,7 +61,7 @@ public class Validator {
     public static void validateInputCountRange(int inputCount) {
 
         if (inputCount < MIN.getTryCount() || inputCount > MAX.getTryCount()) {
-            throw new TryCountException();
+            throw new TryCountOutOfRangeException();
         }
     }
 
