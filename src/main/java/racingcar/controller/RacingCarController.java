@@ -1,5 +1,7 @@
 package racingcar.controller;
 
+import static racingcar.constants.NumberConstants.INDEX_NUMBER;
+
 import java.util.List;
 import racingcar.domain.Car;
 import racingcar.io.InputView;
@@ -55,7 +57,7 @@ public class RacingCarController {
     private void printOneRoundResult(int tryCount, List<Car> cars) {
         outputView.printResultMessage();
         for (int round = 0; round < tryCount; round++) {
-            String oneRoundResult = resultParser.parseOneRoundResult(cars, round);
+            String oneRoundResult = resultParser.parseOneRoundResult(cars, round + INDEX_NUMBER);
             outputView.printOneRoundResult(oneRoundResult);
         }
     }

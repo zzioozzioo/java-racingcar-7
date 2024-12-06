@@ -29,7 +29,7 @@ public class InputView {
     public String readTryCount() {
         writer.write(READ_TRY_COUNT);
         String inputTryCount = reader.readLine();
-        writer.write(NEW_LINE.repeat(NEW_LINE_COUNT));
+        writer.write(NEW_LINE);
         return inputTryCount;
     }
 }

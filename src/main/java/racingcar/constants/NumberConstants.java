@@ -13,4 +13,5 @@ public class NumberConstants {
 
     public static final int MOVE_CONDITION_NUMBER = 4;
 
+    public static final int INDEX_NUMBER = 1;
 }

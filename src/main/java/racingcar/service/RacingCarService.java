@@ -1,6 +1,7 @@
 package racingcar.service;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
+import static racingcar.constants.NumberConstants.INDEX_NUMBER;
 import static racingcar.constants.NumberConstants.MAXIMUM_RANDOM_NUMBER;
 import static racingcar.constants.NumberConstants.MINIMUM_RANDOM_NUMBER;
 import static racingcar.constants.NumberConstants.MOVE_CONDITION_NUMBER;
@@ -11,8 +12,6 @@ import java.util.stream.Collectors;
 import racingcar.domain.Car;
 
 public class RacingCarService {
-
-    private final static int INDEX_NUMBER = 1;
 
     // 경주 시작
     public List<Car> race(List<String> carNames, int tryCount) {

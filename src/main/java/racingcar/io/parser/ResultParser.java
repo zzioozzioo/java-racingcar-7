@@ -17,7 +17,7 @@ public class ResultParser {
         for (Car car : cars) {
             Map<Integer, Integer> roundScore = car.getRoundScore();
             sb.append(String.format(ONE_ROUND_RESULT_FORMAT, car.getCarName()))
-                    .append(DASH.repeat(roundScore.getOrDefault(round, 0)))
+                    .append(DASH.repeat(roundScore.get(round)))
                     .append(NEW_LINE);
         }
         sb.append(NEW_LINE);
@@ -25,6 +25,7 @@ public class ResultParser {
     }
 
     public String parseRaceResult(List<String> winners) {
-        return String.join(COMMA + ONE_BLANK, winners);
+        return String.join(COMMA + ONE_BLANK, winners)
+                + NEW_LINE;
     }
 }
