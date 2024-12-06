@@ -38,7 +38,7 @@ public class RacingCarService {
 
     private void moveOrNot(Car car, int round) {
         if (pickNumberInRange(MINIMUM_RANDOM_NUMBER, MAXIMUM_RANDOM_NUMBER)
-                > MOVE_CONDITION_NUMBER) { // TODO: 다른 클래스에 위임하기
+                >= MOVE_CONDITION_NUMBER) { // TODO: 다른 클래스에 위임하기
             car.move(round);
             return;
         }
