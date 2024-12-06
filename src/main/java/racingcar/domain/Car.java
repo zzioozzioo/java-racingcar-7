@@ -31,4 +31,8 @@ public class Car {
     public Map<Integer, Integer> getRoundScore() {
         return roundScore;
     }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
 }
