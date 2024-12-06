@@ -11,8 +11,8 @@
 
 ### 📌 자동차 전진 기능
 
-- [ ] 0에서 9 사이의 무작위 값이 4 이상인 경우 전진한다.
-- [ ] 그렇지 않으면 전진하지 않는다.
+- [x] 0에서 9 사이의 무작위 값이 4 이상인 경우 전진한다.
+- [x] 그렇지 않으면 전진하지 않는다.
 
 ### 📌 우승자 결정 기능
 
@@ -69,6 +69,6 @@
 
 ### 라이브러리 요구 사항
 
-- [ ] camp.nextstep.edu.missionutils에서 제공하는 DateTimes 및 Console API를 사용하여 구현
-- [ ] 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용
-- [ ] 현재 날짜와 시간을 가져오려면 camp.nextstep.edu.missionutils.DateTimes의 now()를 활용
+- [ ] `camp.nextstep.edu.missionutils`에서 제공하는 `Randoms` 및 `Console` API를 사용하여 구현
+    - [ ] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInRange()`를 활용한다.
+    - [ ] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용
