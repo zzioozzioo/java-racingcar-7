@@ -1,10 +1,6 @@
 package racingcar.service;
 
-import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
 import static racingcar.constants.NumberConstants.INDEX_NUMBER;
-import static racingcar.constants.NumberConstants.MAXIMUM_RANDOM_NUMBER;
-import static racingcar.constants.NumberConstants.MINIMUM_RANDOM_NUMBER;
-import static racingcar.constants.NumberConstants.MOVE_CONDITION_NUMBER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,17 +28,8 @@ public class RacingCarService {
 
     private void processOneRound(List<Car> cars, int round) {
         for (Car car : cars) {
-            moveOrNot(car, round);
+            car.moveOrNot(round);
         }
-    }
-
-    private void moveOrNot(Car car, int round) {
-        if (pickNumberInRange(MINIMUM_RANDOM_NUMBER, MAXIMUM_RANDOM_NUMBER)
-                >= MOVE_CONDITION_NUMBER) { // TODO: 다른 클래스에 위임하기
-            car.move(round);
-            return;
-        }
-        car.notMove(round);
     }
 
     // 우승자 결정
