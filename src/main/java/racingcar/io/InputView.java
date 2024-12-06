@@ -17,14 +17,14 @@ public class InputView {
         this.writer = writer;
     }
 
-    public String readCarNames(String input) {
+    public String readCarNames() {
         writer.write(READ_CAR_NAMES_MESSAGES);
         String inputCarNames = reader.readLine();
         writer.write(NEW_LINE);
         return inputCarNames;
     }
 
-    public String readTryCount(String input) {
+    public String readTryCount() {
         writer.write(READ_TRY_COUNT);
         String inputTryCount = reader.readLine();
         writer.write(NEW_LINE);
