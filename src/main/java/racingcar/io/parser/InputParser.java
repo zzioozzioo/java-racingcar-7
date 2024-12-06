@@ -2,6 +2,8 @@ package racingcar.io.parser;
 
 import static racingcar.constants.NumberConstants.MAXIMUM_LENGTH_OF_CAR_NAME;
 import static racingcar.constants.NumberConstants.MAXIMUM_NUMBER_OF_CARS;
+import static racingcar.constants.NumberConstants.MAXIMUM_TRY_COUNT;
+import static racingcar.constants.NumberConstants.MINIMUM_TRY_COUNT;
 import static racingcar.constants.StringConstants.CAR_NAME_FORMAT;
 import static racingcar.constants.StringConstants.COMMA;
 
@@ -81,7 +83,7 @@ public class InputParser {
     }
 
     private void validateTryCount(int tryCount) {
-        if (tryCount < 1 || tryCount > 10) {
+        if (tryCount < MINIMUM_TRY_COUNT || tryCount > MAXIMUM_TRY_COUNT) {
             throw new InvalidInputException();
         }
     }

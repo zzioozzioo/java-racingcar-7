@@ -1,6 +1,9 @@
 package racingcar.service;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
+import static racingcar.constants.NumberConstants.MAXIMUM_RANDOM_NUMBER;
+import static racingcar.constants.NumberConstants.MINIMUM_RANDOM_NUMBER;
+import static racingcar.constants.NumberConstants.MOVE_CONDITION_NUMBER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +12,13 @@ import racingcar.domain.Car;
 
 public class RacingCarService {
 
+    private final static int INDEX_NUMBER = 1;
+
     // 경주 시작
     public List<Car> race(List<String> carNames, int tryCount) {
         List<Car> cars = getAllCars(carNames);
-        for (int round = 1; round < tryCount + 1; round++) { // 시도 횟수만큼 경주
-            processOneRound(cars, round);
+        for (int round = 0; round < tryCount; round++) { // 시도 횟수만큼 경주
+            processOneRound(cars, round + INDEX_NUMBER);
         }
         return cars;
     }
@@ -33,7 +38,8 @@ public class RacingCarService {
     }
 
     private void moveOrNot(Car car, int round) {
-        if (pickNumberInRange(0, 9) > 4) { // TODO: 다른 클래스에 위임하기
+        if (pickNumberInRange(MINIMUM_RANDOM_NUMBER, MAXIMUM_RANDOM_NUMBER)
+                > MOVE_CONDITION_NUMBER) { // TODO: 다른 클래스에 위임하기
             car.move(round);
             return;
         }
