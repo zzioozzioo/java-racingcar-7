@@ -5,12 +5,12 @@ import static racingcar.constants.NumberConstants.MAXIMUM_NUMBER_OF_CARS;
 import static racingcar.constants.NumberConstants.MAXIMUM_TRY_COUNT;
 import static racingcar.constants.NumberConstants.MINIMUM_TRY_COUNT;
 import static racingcar.constants.StringConstants.CAR_NAME_FORMAT;
-import static racingcar.constants.StringConstants.COMMA;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import racingcar.constants.Delimiter;
 import racingcar.exception.InvalidInputException;
 
 public class InputParser {
@@ -26,7 +26,7 @@ public class InputParser {
     }
 
     private List<String> parseInputCarNames(String input) {
-        List<String> carNames = Arrays.asList(input.split(COMMA));
+        List<String> carNames = Arrays.asList(input.split(Delimiter.COMMA.getDelimiter()));
         for (String carName : carNames) {
             if (!carName.matches(CAR_NAME_FORMAT)) {
                 throw new InvalidInputException();

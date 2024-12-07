@@ -1,13 +1,13 @@
 package racingcar.io.parser;
 
 import static racingcar.constants.OutputMessages.ONE_ROUND_RESULT_FORMAT;
-import static racingcar.constants.StringConstants.COMMA;
 import static racingcar.constants.StringConstants.DASH;
 import static racingcar.constants.StringConstants.NEW_LINE;
 import static racingcar.constants.StringConstants.ONE_BLANK;
 
 import java.util.List;
 import java.util.Map;
+import racingcar.constants.Delimiter;
 import racingcar.domain.Car;
 
 public class ResultParser {
@@ -25,7 +25,7 @@ public class ResultParser {
     }
 
     public String parseRaceResult(List<String> winners) {
-        return String.join(COMMA + ONE_BLANK, winners)
+        return String.join(Delimiter.COMMA.getDelimiter() + ONE_BLANK, winners)
                 + NEW_LINE;
     }
 }
