@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import racingcar.domain.Car;
+import racingcar.domain.CarManager;
 
 public class RacingCarService {
 
@@ -28,7 +29,8 @@ public class RacingCarService {
 
     private void processOneRound(List<Car> cars, int round) {
         for (Car car : cars) {
-            car.moveOrNot(round);
+            boolean isMoveCondition = new CarManager().isMoveCondition();
+            car.moveOrNot(isMoveCondition, round);
         }
     }
 

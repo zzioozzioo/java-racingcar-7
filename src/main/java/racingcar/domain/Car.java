@@ -1,10 +1,5 @@
 package racingcar.domain;
 
-import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
-import static racingcar.constants.NumberConstants.MAXIMUM_RANDOM_NUMBER;
-import static racingcar.constants.NumberConstants.MINIMUM_RANDOM_NUMBER;
-import static racingcar.constants.NumberConstants.MOVE_CONDITION_NUMBER;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,17 +15,12 @@ public class Car {
         this.totalScore = 0;
     }
 
-    public void moveOrNot(int round) {
-        if (isMoveCondition()) {
+    public void moveOrNot(boolean isMoveCondition, int round) {
+        if (isMoveCondition) {
             move(round);
             return;
         }
         notMove(round);
-    }
-
-    private boolean isMoveCondition() {
-        return pickNumberInRange(MINIMUM_RANDOM_NUMBER, MAXIMUM_RANDOM_NUMBER)
-                >= MOVE_CONDITION_NUMBER;
     }
 
     public void move(int round) {
